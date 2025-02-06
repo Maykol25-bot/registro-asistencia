@@ -1,0 +1,118 @@
+/* Reseteamos márgenes y paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo general de la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor principal */
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 450px;  /* Tamaño reducido */
+    box-shadow: 0px 0px 10px 0px gray;
+    text-align: center;
+}
+
+/* Título principal */
+h1 {
+    font-size: 1.8rem;
+    color: #3498db; /* Azul claro */
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Sección de datos */
+.datos-reunion, .user-info {
+    margin-bottom: 15px;
+}
+
+/* Estilo para los títulos */
+.datos-reunion p, .user-info p {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: #2C3E50;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Sombra suave */
+}
+
+/* Estilo para los valores */
+.datos-reunion span, .user-info span {
+    font-size: 1.1rem;
+    font-weight: normal;
+    display: block;
+    color: #7f8c8d; /* Color plomo */
+    margin-top: 3px;
+    text-transform: capitalize;
+}
+
+/* Estilo para etiquetas de entrada */
+label {
+    font-size: 1rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilo para los campos de entrada */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* Botones */
+button {
+    padding: 10px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #3498db; /* Azul claro */
+    color: white;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9; /* Azul más oscuro */
+}
+
+/* Estilo para los mensajes de error y éxito */
+ul {
+    list-style-type: none;
+    margin-top: 15px;
+    padding: 0;
+}
+
+ul li {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+ul li.success {
+    background-color: #4CAF50;
+}

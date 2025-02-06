@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Asistencia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>REGISTRO DE ASISTENCIA</h1>
+
+        <div class="datos-reunion">
+            <p>Tema</p>
+            <span>{{ tema }}</span>
+
+            <p>Expositor</p>
+            <span>{{ expositor }}</span>
+
+            <p>Lugar</p>
+            <span>{{ lugar }}</span>
+
+            <p>Fecha</p>
+            <span>{{ fecha }}</span>
+        </div>
+
+        <form action="/buscar" method="POST">
+            <label for="dni">Ingrese su DNI:</label>
+            <input type="text" id="dni" name="dni" required>
+            <button type="submit">Buscar</button>
+        </form>
+
+        {% if nombre %}
+        <div class="user-info">
+            <p>Nombre</p>
+            <span>{{ nombre }}</span>
+
+            <p>Cargo</p>
+            <span>{{ cargo }}</span>
+
+            <form action="/registrar" method="POST">
+                <input type="hidden" name="dni" value="{{ dni }}">
+                <input type="hidden" name="nombre" value="{{ nombre }}">
+                <input type="hidden" name="cargo" value="{{ cargo }}">
+                <button type="submit">Registrar Asistencia</button>
+            </form>
+        </div>
+        {% endif %}
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li class="{% if 'Error' in message %}error{% else %}success{% endif %}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+</body>
+</html>

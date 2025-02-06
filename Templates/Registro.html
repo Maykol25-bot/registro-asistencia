@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Asistencia</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
+        h1 { color: #333; }
+        label { font-weight: bold; }
+        input, button { padding: 10px; margin: 10px; }
+        .container { background: white; padding: 20px; border-radius: 10px; width: 50%; margin: auto; box-shadow: 0px 0px 10px 0px gray; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>REGISTRO DE ASISTENCIA</h1>
+        <p><b>TEMA:</b> <span id="tema">{{ tema }}</span></p>
+        <p><b>EXPOSITOR:</b> <span id="expositor">{{ expositor }}</span></p>
+        <p><b>LUGAR:</b> <span id="lugar">{{ lugar }}</span></p>
+        <p><b>FECHA:</b> <span id="fecha">{{ fecha }}</span></p>
+
+        <label for="dni">Ingrese su DNI:</label>
+        <input type="text" id="dni" placeholder="DNI">
+        <button onclick="buscarDNI()">Buscar</button>
+
+        <div id="datos_usuario"></div>
+
+        <button onclick="registrarAsistencia()">Registrar Asistencia</button>
+        <p id="mensaje"></p>
+    </div>
+
+    <script>
+        // Función para buscar usuario por DNI
+        function buscarDNI() {
+            let dni = document.getElementById("dni").value;
+            if (dni === "") {
+                alert("Por favor ingrese un DNI.");
+                return;
+            }
+
+            fetch(`/buscar_dni?dni=${dni}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById("datos_usuario").innerHTML = `<p style="color:red;">${data.error}</p>`;
+                } else {
+                    document.getElementById("datos_usuario").innerHTML = `
+                        <p><b>DNI:</b> ${data.dni}</p>
+                        <p><b>Nombre:</b> ${data.nombre}</p>
+                        <p><b>Cargo:</b> ${data.cargo}</p>
+                    `;
+                }
+            })
+            .catch(error => {
+                document.getElementById("datos_usuario").innerHTML = `<p style="color:red;">Error al buscar el DNI.</p>`;
+            });
+        }
+
+        // Función para registrar asistencia
+        function registrarAsistencia() {
+            let dni = document.getElementById("dni").value;
+            fetch('/registrar_asistencia', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ dni: dni })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("mensaje").innerText = data.mensaje;
+            });
+        }
+    </script>
+
+</body>
+</html>
